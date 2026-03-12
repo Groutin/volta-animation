@@ -89,13 +89,24 @@ body {
 }
   
 /* ─── HEART POLYGONAL ─── */
+/*
+  Logo (#Layer1) : width=50vw, viewBox 820×240
+  → hauteur rendue = 50vw × (240/820) ≈ 14.63vw
+  Le cœur est calé à 90% de cette hauteur ≈ 13.17vw,
+  ce qui reproduit exactement la proportion originale (253px sur 1920px)
+  et s'adapte dynamiquement à toute taille d'écran.
+*/
+:root {
+  --logo-h: calc(50vw * 240 / 820);
+  --heart-size: calc(var(--logo-h) * 1.26);
+}
 #heart-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 253px;
-  height: 253px;
+  width: var(--heart-size);
+  height: var(--heart-size);
   z-index: 49;
   pointer-events: none;
   animation: heart-fade 12s ease infinite;
