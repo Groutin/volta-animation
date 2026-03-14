@@ -40,13 +40,17 @@ body {
   animation: pulse 12s ease infinite;
 }
 #Layer2 {
-  position: absolute;
+  position: fixed;
   fill: none;
-  overflow: initial;
-  width: 501%;
-  left: -165.1%;
+  overflow: visible;
+  width: 501vw;
+  left: -165vw;
   z-index: 48;
-  top: 22.8%;
+  /* ECG midline at y=242 in viewBox height 500 (48.4%).
+     SVG rendered height = 501vw * (500/7731) ≈ 32.43vw
+     48.4% of 32.43vw ≈ 15.69vw
+     → top = calc(50vh - 15.69vw) */
+  top: calc(50vh - 15.69vw);
   stroke: #0bbdc2;
   filter: blur(7px);
   stroke-width: 7px;
@@ -1368,9 +1372,9 @@ const logoCanvas = document.getElementById('logo-canvas');
 const logoCtx    = logoCanvas.getContext('2d');
 
 function rand(a, b) { return a + Math.random() * (b - a); }
-function getEcgY()  { return bgCanvas.height * 0.455; }
+function getEcgY()  { return bgCanvas.height * 0.5; }
 function getLogoCX(){ return bgCanvas.width  * 0.5; }
-function getLogoCY(){ return bgCanvas.height * 0.455; }
+function getLogoCY(){ return bgCanvas.height * 0.5; }
 
 /* ── size both canvases ── */
 function resizeCanvases() {
